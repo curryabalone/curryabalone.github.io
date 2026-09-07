@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot System Identification | Yuze Cai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles-v5.css">
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo">Yuze Cai</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <h1>robot-sysid</h1>
+            <p class="subtitle">Robotic Arm System Identification via Spatial Dynamics Regressors</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">MuJoCo</span>
+                <span class="tech-tag">SymPy</span>
+                <span class="tech-tag">NumPy</span>
+                <span class="tech-tag">Least Squares</span>
+                <span class="tech-tag">Spatial Dynamics</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/curryabalone/Robotic-Arm-System-ID-" target="_blank" class="social-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Project GitHub
+                </a>
+            </div>
+        </section>
+
+        <section class="container project-detail">
+            <h2 class="section-title">Overview</h2>
+            <div class="project-description">
+                <p>A generic, robot-agnostic system identification tool that solves for the 10 standard rigid-body inertial parameters (mass, center-of-mass moments, and inertia tensor) plus optional Coulomb and viscous friction coefficients for a robot's terminal link from MuJoCo simulation data. The regressor matrix is typically rank-deficient (e.g., rank 7 for the Kinova example), meaning not all parameters are independently identifiable — the tool reports the number of identifiable base parameters as a quality metric and handles rank deficiency gracefully via minimum-norm least-squares.</p>
+                <p>Common use case: you've attached a payload or tool to your robot's end-effector and need to identify the composite inertial properties for accurate dynamic modeling and control.</p>
+            </div>
+
+            <h2 class="section-title">Technical Highlights</h2>
+            <div class="tech-details">
+                <div class="tech-item">
+                    <h3>Robot-Agnostic</h3>
+                    <p>Works with any MuJoCo XML model. Automatically detects the terminal joint from the kinematic tree — not limited to specific robot types.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Symbolic Regressor Derivation</h3>
+                    <p>Uses SymPy to analytically derive the spatial dynamics regressor matrix, ensuring mathematical correctness and avoiding numerical differentiation errors.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Friction Identification</h3>
+                    <p>Optionally identifies Coulomb and viscous friction coefficients alongside the 10 inertial parameters, appending two columns to the regressor.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Hardware Export</h3>
+                    <p>Generates trajectory files for Damiao motors with automatic limit clamping, enabling the same excitation trajectory to run on real hardware.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Analytical Derivatives</h3>
+                    <p>Trajectory velocities and accelerations are computed exactly as closed-form derivatives of position sinusoids — no finite differencing.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Quality Metrics</h3>
+                    <p>Reports RMSE, condition number, and matrix rank to assess identification quality and regressor conditioning.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Pipeline</h2>
+            <div class="project-description">
+                <ol class="pipeline-list">
+                    <li><strong>Parse</strong> — Load a MuJoCo XML model and extract the kinematic chain</li>
+                    <li><strong>Generate</strong> — Create multi-frequency sinusoidal excitation trajectories</li>
+                    <li><strong>Simulate</strong> — Run MuJoCo simulation, collecting spatial velocity, acceleration, and torque</li>
+                    <li><strong>Solve</strong> — Compute the regressor matrix $Y$ and solve $\theta = Y^\dagger \tau$ via least-squares</li>
+                    <li><strong>Export</strong> — Output identified parameters as JSON and an updated MuJoCo XML</li>
+                </ol>
+            </div>
+
+            <h2 class="section-title">Mathematical Formulation</h2>
+            <div class="project-description math-section">
+                <h3>Spatial Dynamics Regressor</h3>
+                <p>The tool establishes a linear relationship between joint torques and inertial parameters:</p>
+                <div class="math-block">$$\tau = Y\theta$$</div>
+                <p>where $\tau$ is the joint torque, $Y$ is the regressor matrix, and $\theta$ is the parameter vector:</p>
+                <div class="math-block">$$\theta = [m,\; h_x,\; h_y,\; h_z,\; I_{xx},\; I_{xy},\; I_{xz},\; I_{yy},\; I_{yz},\; I_{zz}]^T$$</div>
+
+                <h3>Spatial Inertia Matrix</h3>
+                <p>The spatial inertia matrix $G_a \in \mathbb{R}^{6 \times 6}$ encodes the mass distribution:</p>
+                <div class="math-block">$$G_a = \begin{bmatrix} \bar{I} & [h]_\times \\ -[h]_\times & mI_3 \end{bmatrix}$$</div>
+                <p>where $\bar{I}$ is the inertia tensor, $h = m \cdot c$ is the first moment of mass, and $[h]_\times$ is the skew-symmetric matrix:</p>
+                <div class="math-block">$$[h]_\times = \begin{bmatrix} 0 & -h_z & h_y \\ h_z & 0 & -h_x \\ -h_y & h_x & 0 \end{bmatrix}$$</div>
+
+                <h3>Newton-Euler Dynamics</h3>
+                <p>The 6D wrench is governed by the spatial Newton-Euler equation:</p>
+                <div class="math-block">$$F_a = G_a \dot{V}_a - [\text{ad}_{V_a}]^T G_a V_a$$</div>
+                <p>where $V_a = [\omega^T, v^T]^T$ is the spatial velocity, $\dot{V}_a$ is the spatial acceleration, and $[\text{ad}_{V_a}]^T$ is the adjoint transpose capturing gyroscopic effects:</p>
+                <div class="math-block">$$[\text{ad}_{V_a}]^T = \begin{bmatrix} -[\omega]_\times & -[v]_\times \\ 0_{3\times3} & -[\omega]_\times \end{bmatrix}$$</div>
+
+                <h3>Full 6×10 Regressor Matrix</h3>
+                <p>The regressor $Y$ is obtained by computing the Jacobian $\frac{\partial F_a}{\partial \theta}$. Each row corresponds to one component of the 6D wrench $F_a = [n_x, n_y, n_z, f_x, f_y, f_z]^T$ and each column to one inertial parameter:</p>
+                <div class="math-block">$$Y = \begin{bmatrix}
+0 & 0 & \dot{v}_z + \omega_x v_y - \omega_y v_x & -\dot{v}_y + \omega_x v_z - \omega_z v_x & \dot{\omega}_x & \dot{\omega}_y - \omega_x\omega_z & \dot{\omega}_z + \omega_x\omega_y & -\omega_y\omega_z & \omega_y^2 - \omega_z^2 & \omega_y\omega_z \\
+0 & -\dot{v}_z - \omega_x v_y + \omega_y v_x & 0 & \dot{v}_x + \omega_y v_z - \omega_z v_y & \omega_x\omega_z & \dot{\omega}_x + \omega_y\omega_z & -\omega_x^2 + \omega_z^2 & \dot{\omega}_y & \dot{\omega}_z - \omega_x\omega_y & -\omega_x\omega_z \\
+0 & \dot{v}_y - \omega_x v_z + \omega_z v_x & -\dot{v}_x - \omega_y v_z + \omega_z v_y & 0 & -\omega_x\omega_y & \omega_x^2 - \omega_y^2 & \dot{\omega}_x - \omega_y\omega_z & \omega_x\omega_y & \dot{\omega}_y + \omega_x\omega_z & \dot{\omega}_z \\
+\dot{v}_x + \omega_y v_z - \omega_z v_y & -\omega_y^2 - \omega_z^2 & -\dot{\omega}_z + \omega_x\omega_y & \dot{\omega}_y + \omega_x\omega_z & 0 & 0 & 0 & 0 & 0 & 0 \\
+\dot{v}_y - \omega_x v_z + \omega_z v_x & \dot{\omega}_z + \omega_x\omega_y & -\omega_x^2 - \omega_z^2 & -\dot{\omega}_x + \omega_y\omega_z & 0 & 0 & 0 & 0 & 0 & 0 \\
+\dot{v}_z + \omega_x v_y - \omega_y v_x & -\dot{\omega}_y + \omega_x\omega_z & \dot{\omega}_x + \omega_y\omega_z & -\omega_x^2 - \omega_y^2 & 0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}$$</div>
+
+                <h3>Joint Torque Projection</h3>
+                <p>For a revolute joint with axis $a = [a_x, a_y, a_z]^T$, the scalar joint torque is:</p>
+                <div class="math-block">$$\tau = a^T \begin{bmatrix} Y_{1,1:10} \\ Y_{2,1:10} \\ Y_{3,1:10} \end{bmatrix} \theta$$</div>
+                <p>This gives a $1 \times 10$ regressor row per timestep. Stacking all timesteps yields the full system $\tau = Y\theta$.</p>
+
+                <h3>Friction Extension</h3>
+                <p>When friction is included, two columns are appended:</p>
+                <div class="math-block">$$Y_{\text{friction}} = \begin{bmatrix} Y_{\text{inertial}} & \text{sign}(\dot{q}) & \dot{q} \end{bmatrix}$$</div>
+                <p>giving the total torque model:</p>
+                <div class="math-block">$$\tau_{\text{total}} = a^T \begin{bmatrix} Y_{1:3} \end{bmatrix} \theta_{\text{inertial}} + f_c \cdot \text{sign}(\dot{q}) + f_v \cdot \dot{q}$$</div>
+
+                <h3>Least-Squares Solution & Base Parameters</h3>
+                <p>The parameter vector is recovered via the Moore-Penrose pseudoinverse, which handles rank-deficient regressors gracefully (minimum-norm solution):</p>
+                <div class="math-block">$$\theta = Y^\dagger \tau$$</div>
+                <p>Due to the structure of the dynamics equations, the regressor is typically rank-deficient — not all 10 inertial parameters are independently identifiable from single-joint torque measurements. The identifiable combinations are called <strong>base parameters</strong>. The tool reports the number of base parameters (matrix rank) as a quality metric; for well-conditioned data this should be close to 10.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Yuze Cai. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

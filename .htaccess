@@ -1,0 +1,37 @@
+# === LiteSpeed: disable server-side full-page cache ===
+<IfModule LiteSpeed>
+    CacheDisable public /
+</IfModule>
+
+# === No caching for HTML / CSS / JS (by content type, catches clean URLs too) ===
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType text/css "access plus 0 seconds"
+    ExpiresByType application/javascript "access plus 0 seconds"
+    ExpiresByType application/x-javascript "access plus 0 seconds"
+    # Cache static media for a year
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType application/vnd.apple.mpegurl "access plus 0 seconds"
+    ExpiresByType video/mp2t "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# === Force no-store on documents and code via content type ===
+<IfModule mod_headers.c>
+    # Default: no caching
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+
+    # Re-enable long caching only for static media
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|mp4|ts|woff2?)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    Header unset ETag
+</IfModule>
+FileETag None

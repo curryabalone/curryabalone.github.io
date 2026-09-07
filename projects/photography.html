@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | Yuze Cai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles-v5.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo">Yuze Cai</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <h1>Photography</h1>
+            <p class="subtitle">A personal collection</p>
+        </section>
+
+        <section class="container">
+            <div class="photo-viewer">
+                <button class="photo-nav photo-prev" aria-label="Previous photo">&#8249;</button>
+                <div class="photo-stage">
+                    <img id="photo" src="../assets/images/photography/1.jpg" alt="Photograph">
+                </div>
+                <button class="photo-nav photo-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <p class="photo-counter"><span id="photo-index">1</span> / 7</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Yuze Cai. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var total = 7;
+            var current = 1;
+            var img = document.getElementById('photo');
+            var indexLabel = document.getElementById('photo-index');
+
+            // Preload neighbours so navigation feels instant
+            function preload(n) {
+                if (n < 1 || n > total) return;
+                var i = new Image();
+                i.src = '../assets/images/photography/' + n + '.jpg';
+            }
+
+            function show(n) {
+                current = (n - 1 + total) % total + 1;
+                img.src = '../assets/images/photography/' + current + '.jpg';
+                indexLabel.textContent = current;
+                preload(current + 1);
+                preload(current - 1);
+            }
+
+            document.querySelector('.photo-prev').addEventListener('click', function () { show(current - 1); });
+            document.querySelector('.photo-next').addEventListener('click', function () { show(current + 1); });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft') show(current - 1);
+                if (e.key === 'ArrowRight') show(current + 1);
+            });
+
+            preload(2);
+        })();
+    </script>
+</body>
+
+</html>

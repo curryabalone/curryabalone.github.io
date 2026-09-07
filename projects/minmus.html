@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minmus Flight Computer | Yuze Cai</title>
+    <link rel="stylesheet" href="../css/styles-v5.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">Yuze Cai</a>
+                <div class="nav-links">
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <h1>Minmus Flight Computer</h1>
+            <p class="subtitle">Research Portfolio | August 2023 - Ongoing</p>
+            <div class="tech-stack">
+                <span class="tech-tag">FreeRTOS</span>
+                <span class="tech-tag">ESP32</span>
+                <span class="tech-tag">PCB Design</span>
+                <span class="tech-tag">I2C</span>
+                <span class="tech-tag">BLDC Control</span>
+                <span class="tech-tag">Embedded C</span>
+            </div>
+        </section>
+
+        <section class="container project-detail">
+            <h2 class="section-title">Embedded Systems Architecture</h2>
+            <div class="tech-details">
+                <div class="tech-item">
+                    <h3>Real-Time Operating System</h3>
+                    <p>Developed firmware on the FreeRTOS kernel running on ESP32 microcontrollers, enabling deterministic task scheduling and efficient resource management for time-critical flight control operations.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Distributed Processing Architecture</h3>
+                    <p>Engineered a custom I2C communication protocol connecting three ESP32 boards: a main flight controller handling sensor fusion and two auxiliary BLDC motor driver boards. Achieved zero dropped packets during flight operations through robust error handling and timing synchronization.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>High-Speed Motor Control</h3>
+                    <p>Implemented a 32kHz interrupt service routine (ISR) for precision BLDC motor control, generating sinusoidal pulse-width modulation signals for smooth, efficient motor commutation with minimal torque ripple.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Flight Data Logging</h3>
+                    <p>Designed a rotating buffer system for SD card data logging, ensuring continuous high-frequency telemetry capture without blocking critical flight control tasks or risking data loss during write operations.</p>
+                </div>
+            </div>
+
+            <div class="project-description">
+                <h2 class="section-title">Description</h2>
+                <p>Minmus is a series of custom-printed circuit boards that I designed to replace the hassle of wiring
+                    on my different projects. These boards started as simple breakout boards and gradually evolved into
+                    multi-layer boards with special power, impedance, and signal integrity considerations.</p>
+            </div>
+
+            <h2 class="section-title">Evolution Timeline</h2>
+            <div class="grid gallery-grid">
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_13c63caede4948ffb3336b65d0713c60~mv2.jpg"
+                        alt="Minmus V0 (Jan 2023)">
+                    <p class="caption">Minmus V0 (Jan 2023)</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_4e437f41601c41d0985909ce0c5f330e~mv2.jpg"
+                        alt="Minmus V1 (Oct 2023)">
+                    <p class="caption">Minmus V1 (Oct 2023)</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_20d8cf165ea34080920b8903b0c57d6c~mv2.jpg"
+                        alt="Minmus V1 Wired Up">
+                    <p class="caption">Minmus V1 Wired Up</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_276fbe359d4444e8a49f9c6785b99a60~mv2.jpg"
+                        alt="Minmus V2 (Nov 2023)">
+                    <p class="caption">Minmus V2 (Nov 2023)</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_c81bfb11533f44d1afe2e12122f222b7~mv2.jpg"
+                        alt="Minmus V2 on SpinTOL">
+                    <p class="caption">Minmus V2 on SpinTOL Hub</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_8b75843aa3ee4e3596fd4c7925430ed5~mv2.jpg"
+                        alt="Minmus V3 (Jan 2023)">
+                    <p class="caption">Minmus V3 (Jan 2023)</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_56683cf1848547ef9a2edfa3bf6432a9~mv2.jpg"
+                        alt="Minmus V3 Wired Up">
+                    <p class="caption">Minmus V3 Wired Up</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_053f11b4061e4b199610abce5fe8e607~mv2.jpg"
+                        alt="Minmus V4 (May 2024)">
+                    <p class="caption">Minmus V4 (May 2024)</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_4d307412deeb43c282da37e9a3b13611~mv2.jpg"
+                        alt="Minmus V4 on SpinTOL">
+                    <p class="caption">Minmus V4 on SpinTOL</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/fce0e1_8c0316a1ec0a421192ff259a60fbfe7e~mv2.jpg"
+                        alt="Minmus V6 Render">
+                    <p class="caption">Minmus V6 Render</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/minmus/prog/minmus_cover.jpg" alt="Minmus V6 (Mar 2025)">
+                    <p class="caption">Minmus V6 (Mar 2025)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Yuze Cai. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
