@@ -327,16 +327,33 @@ nav {
 
 /* Footer */
 
-.visitor-map {
-    display: flex;
-    justify-content: center;
-    margin-bottom: var(--spacing-md);
-}
-
-.visitor-map #mapmyvisitors-widget {
+.visitor-map-nav {
+    width: 75px;
+    height: 37px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
     border: 1px solid var(--border-color);
     border-radius: 2px;
-    overflow: hidden;
+}
+
+.visitor-map-nav .mapmyvisitors-visitors,
+.visitor-map-nav .mapmyvisitors-date {
+    display: none !important;
+}
+
+.visitor-map-nav #mapmyvisitors-widget {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(0.25);
+    transform-origin: top left;
+}
+
+@media (max-width: 480px) {
+    .visitor-map-nav {
+        display: none;
+    }
 }
 
 footer {
