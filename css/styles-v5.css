@@ -1,13 +1,13 @@
 :root {
     /* Color Palette - Muted, aged-paper */
-    --bg-color: #f6efdc;
-    --card-bg: #efe4c8;
+    --bg-color: #faf7ee;
+    --card-bg: #f7f2e4;
     --text-primary: #1c1c1a;
     --text-secondary: #5c5850;
     --accent-color: #1d3557;
     /* Muted ink navy — used only for genuine links */
     --accent-hover: #12233c;
-    --border-color: #d8c9a3;
+    --border-color: #ece4d1;
 
     /* Spacing */
     --container-width: 1200px;
