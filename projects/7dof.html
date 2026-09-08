@@ -63,48 +63,31 @@
             <h2 class="section-title">Videos</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <video class="hls-video" data-src="../assets/images/7dof/hls/1/master.m3u8"
-                        muted loop playsinline controls preload="none" width="100%"></video>
+                    <video class="gif-video" data-src="../assets/images/7dof/1.mp4"
+                        muted loop playsinline preload="none"></video>
                 </div>
                 <div class="gallery-item">
-                    <video class="hls-video" data-src="../assets/images/7dof/hls/2/master.m3u8"
-                        muted loop playsinline controls preload="none" width="100%"></video>
+                    <video class="gif-video" data-src="../assets/images/7dof/2.mp4"
+                        muted loop playsinline preload="none"></video>
                 </div>
                 <div class="gallery-item">
-                    <video class="hls-video" data-src="../assets/images/7dof/hls/3/master.m3u8"
-                        muted loop playsinline controls preload="none" width="100%"></video>
+                    <video class="gif-video" data-src="../assets/images/7dof/3.mp4"
+                        muted loop playsinline preload="none"></video>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
     <script>
         (function () {
-            var videos = document.querySelectorAll('.hls-video');
-
-            // Attach an HLS stream to a <video> element, using native HLS on Safari
-            // and hls.js elsewhere. Adaptive bitrate keeps playback smooth on slow links.
-            function attach(video) {
-                if (video.dataset.attached) return;
-                video.dataset.attached = '1';
-                var src = video.dataset.src;
-
-                if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = src; // Safari / iOS native HLS
-                } else if (window.Hls && Hls.isSupported()) {
-                    var hls = new Hls({ capLevelToPlayerSize: true, maxBufferLength: 10 });
-                    hls.loadSource(src);
-                    hls.attachMedia(video);
-                }
-            }
+            var videos = document.querySelectorAll('.gif-video');
 
             // Only load + play a video once it scrolls into view; pause when it leaves.
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     var video = entry.target;
                     if (entry.isIntersecting) {
-                        attach(video);
+                        if (!video.src) video.src = video.dataset.src;
                         var p = video.play();
                         if (p) p.catch(function () { });
                     } else {
