@@ -241,6 +241,12 @@ nav {
     border-bottom: 1px solid var(--border-color);
 }
 
+.section-title .section-note {
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
 .project-grid {
     display: flex;
     flex-wrap: wrap;
