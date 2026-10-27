@@ -134,6 +134,47 @@ nav {
     margin-bottom: 0;
 }
 
+/* Intro */
+.intro {
+    padding: 0 0 var(--spacing-md);
+}
+
+.intro p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 52rem;
+    margin-bottom: 1rem;
+}
+
+.intro p:last-child {
+    margin-bottom: 0;
+}
+
+.intro a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.intro a:hover {
+    color: var(--accent-hover);
+}
+
+.intro sup {
+    line-height: 0;
+}
+
+.inline-logo {
+    height: 1.3em;
+    width: auto;
+    vertical-align: -0.28em;
+    margin-right: 0.3em;
+}
+
+.inline-logo[src$=".jpg"] {
+    mix-blend-mode: multiply;
+}
+
 /* Projects Section */
 .projects {
     padding: var(--spacing-lg) 0;
