@@ -227,6 +227,16 @@ nav {
     margin-top: 0.25rem;
 }
 
+.publication-meta a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.publication-meta a:hover {
+    color: var(--accent-hover);
+}
+
 .section-title {
     font-family: var(--font-sans);
     font-size: 0.82rem;
