@@ -245,6 +245,11 @@ nav {
     color: var(--accent-hover);
 }
 
+.publication-tag .venue {
+    color: #b22222;
+    font-weight: 700;
+}
+
 .section-title {
     font-family: var(--font-sans);
     font-size: 0.82rem;
